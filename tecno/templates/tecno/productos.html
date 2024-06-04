@@ -10,68 +10,26 @@
 {% endblock  %}
 
 {% block contenido %}
+
+{% load humanize %}
+
 <div class="productos">
+    {% for p in productos %}
     <div class="producto">
         <div class="contenedor">
-            <img src="{% static 'tecno/img/productos/lenovo_yoga_710.jpeg' %}" alt="yoga">
+            {% if p.imagen %}
+            <img src="{{p.imagen.url}}" alt="yoga">
+            {% endif %}
         </div>
 
         <div class="detalles">
-            <h5>Lenovo</h5>
-            <h2>Yoga 710</h2>
-            <h3>$799.990</h3>
+            <h5>{{p.marca}}</h5>
+            <h2>{{p.nombre}}</h2>
+            <h3>${{p.precio | intcomma}}</h3>
+            <button id="btn_carrito">Añadir al carrito</button>
         </div>
     </div>
-
-
-    <div class="producto">
-        <div class="contenedor">
-            <img src="{% static 'tecno/img/productos/iphone.jpeg' %}" alt="yoga">
-        </div>
-
-        <div class="detalles">
-            <h5>apple</h5>
-            <h2>Iphone</h2>
-            <h3>$699.990</h3>
-        </div>
-    </div>
-
-    <div class="producto">
-        <div class="contenedor">
-            <img src="{% static 'tecno/img/productos/lenovo_tablet.jpeg' %}" alt="tablet">
-        </div>
-
-        <div class="detalles">
-            <h5>lenovo</h5>
-            <h2>Tables</h2>
-            <h3>$199.990</h3>
-        </div>
-    </div>
-
-    <div class="producto">
-        <div class="contenedor">
-            <img src="{% static 'tecno/img/productos/s9.jpeg' %}" alt="s9">
-        </div>
-
-        <div class="detalles">
-            <h5>Samsung</h5>
-            <h2>Galaxy S9</h2>
-            <h3>$699.990</h3>
-        </div>
-    </div>
-
-    <div class="producto">
-        <div class="contenedor">
-            <img src="{% static 'tecno/img/productos/macbook.jpeg' %}" alt="macbook">
-        </div>
-
-        <div class="detalles">
-            <h5>Apple</h5>
-            <h2>Macbook 13</h2>
-            <h3>$1.200.000</h3>
-        </div>
-    </div>
-
+    {% endfor %}
 </div>
 
 {% endblock %}
