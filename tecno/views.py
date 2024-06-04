@@ -60,7 +60,7 @@ def lista_productos(request):
     productos=Producto.objects.all()
 
     data = {
-        'productos':productos
+        'productos': productos
     }
 
     return render(request,'tecno/producto/lista.html', data)
