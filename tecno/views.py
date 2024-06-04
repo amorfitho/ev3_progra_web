@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Producto
-from .forms import ContactoForm
+from .forms import ContactoForm,ProductoForm
 # Create your views here.
 
 def index(request):
@@ -39,3 +39,13 @@ def usuario1(request):
 
 def usuario2(request):
     return render(request,'tecno/usuario2.html')
+#-------------------------------------------------------------------------------------------
+def agregar_producto(request):
+
+    data ={
+        'form': ProductoForm()
+    }
+
+    
+
+    return render(request,'tecno/producto/agregar.html', data)

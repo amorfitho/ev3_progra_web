@@ -9,16 +9,20 @@
 {% endblock  %}
 
 {% block contenido %}
+{% load crispy_forms_tags %}
+<h2>Contacta con nosostros</h2>
 <form action="" class="formulario_contacto" method="post" >
     
     {% csrf_token %}
 
-    {{ form }}
+    {{ form | crispy }}
 
     <br>
-    <button type="reset">Limpiar</button>
-    <br>
-    <button type="submit" id="btn_Enviar" class="button">enviar</button>
+    <div class="d-flex justify-content-end">
+    <input type="reset" value="Cancelar" class="btn btn-secondary">
+
+    <button type="submit" id="btn_Enviar" class="btn btn-primary">enviar</button>
+    </div>
 </form>
 {{mensage}}
 {% endblock %}
