@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Producto
-from .forms import ContactoForm,ProductoForm
+from .forms import ContactoForm, ProductoForm
 # Create your views here.
 
 def index(request):
@@ -46,7 +46,7 @@ def agregar_producto(request):
         'form': ProductoForm()
     }
 
-    if request.method == 'post':
+    if request.method == 'POST':
         formulario = ProductoForm(data=request.POST, files=request.FILES)
         if formulario.is_valid():
             formulario.save()

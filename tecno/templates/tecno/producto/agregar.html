@@ -1,5 +1,7 @@
 {% extends 'tecno/base.html' %}
 
+{% load static %}
+
 {% block contenido %}
 
 {% load crispy_forms_tags %}
@@ -16,16 +18,18 @@
 
                 <div class="d-flex justify-content-end" >
                 <input type="reset" value="Cancelar" class="btn btn-secondary">
+                <input type="submit" value="Guardar" class="btn btn-primary">
+
                 <button type="submit" id="btn_guardar" class="btn btn-primary">Guardar</button>
                 </div>
             </form>
-
+            {{mensage}}
         </div>
 
     </div>
 
 </div>
 
-{{mensage}}
+
 
 {% endblock %}
