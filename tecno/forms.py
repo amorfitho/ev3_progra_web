@@ -10,5 +10,10 @@ class ContactoForm(forms.ModelForm):
 class ProductoForm(forms.ModelForm):
         
     class Meta:
-        model = Contacto 
+        model = Producto
         fields = '__all__'
+
+        widgets = {
+            "fecha_fabri": forms.SelectDateWidget()
+        }
+    

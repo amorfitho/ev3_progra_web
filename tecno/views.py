@@ -46,6 +46,21 @@ def agregar_producto(request):
         'form': ProductoForm()
     }
 
+    if request.method == 'post':
+        formulario = ProductoForm(data=request.POST, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            data["mensage"] = "guardado correctamente"
+        else:
+            data["form"] = formulario
     
-
     return render(request,'tecno/producto/agregar.html', data)
+#-------------------------------------------------------------------------------------------
+def lista_productos(request):
+    productos=Producto.objects.all()
+
+    data = {
+        'productos':productos
+    }
+
+    return render(request,'tecno/producto/lista.html', data)

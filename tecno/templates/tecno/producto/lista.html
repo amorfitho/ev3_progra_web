@@ -1,0 +1,35 @@
+{% extends 'tecno/base.html' %}
+
+{% block contenido %}
+<table>
+
+    <tr>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Marca</th>
+        <th>¿Es Nuevo?</th>
+
+    </tr>
+
+    {% for p in productos %}
+    <tr>
+        <td>{{ p.nombre}}</td>
+        <td>${{ p.precio | intcomma }}</td>
+        <td>{{ p.marcha}}</td>
+        <td>
+            {% if p.nuevo%}
+            SI
+            {%else%}
+            NO
+            {%endif%}
+        </td>
+
+    </tr>
+    {% endfor %}
+
+
+</table>
+
+
+
+{% endblock %}
