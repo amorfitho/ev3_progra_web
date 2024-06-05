@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Producto
 from .forms import ContactoForm, ProductoForm
 # Create your views here.
@@ -64,3 +64,26 @@ def lista_productos(request):
     }
 
     return render(request,'tecno/producto/lista.html', data)
+#-------------------------------------------------------------------------------------------
+def modificar_producto(request, id):
+
+    producto = get_object_or_404(Producto, id=id)
+
+    data = {
+        'form': ProductoForm(instance=producto)
+    }
+
+    if request.method == 'POST':
+        formulario = ProductoForm(data=request.POST, instance=producto, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(to="lista_producto")
+        data["form"] = formulario
+
+
+    return render(request,'tecno/producto/modificar.html',data)
+#-------------------------------------------------------------------------------------------
+def eliminar_producto(request, id):
+    producto = get_object_or_404(Producto, id=id)
+    producto.delete()
+    return redirect(to="lista_producto")
