@@ -8,6 +8,9 @@ class  ProductoAdmin(admin.ModelAdmin):
     list_filter = ["marca","nuevo"]
     list_per_page = 5
 
+
 admin.site.register(Marca)
 admin.site.register(Producto,ProductoAdmin)
 admin.site.register(Contacto)
+
+

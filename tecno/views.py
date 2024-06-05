@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Producto
-from .forms import ContactoForm, ProductoForm
+from .forms import ContactoForm, ProductoForm, CustomCreationForm
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.http import Http404
@@ -100,3 +100,11 @@ def eliminar_producto(request, id):
     producto.delete()
     messages.success(request, "eliminado correctamente")
     return redirect(to="lista_producto")
+#-------------------------------------------------------------------------------------------
+def registro(request):
+
+    data = {
+        'form': CustomCreationForm()
+    }
+
+    return render(request, 'registration/registro.html',data)
