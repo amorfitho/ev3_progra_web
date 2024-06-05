@@ -41,14 +41,17 @@
                     </li>
                     {% if user.is_authenticated %}
                     <li>
-                        <a href="{% url 'logout' %}">Cerrar Sesión</a>
+                        <a href="{% url 'logout' %}">Cerrar</a>
                     </li>
                     <li>
                         <a href="#">@{{ user.username }}</a>
                     </li>
                     {%else%}
                     <li>
-                        <a href="{% url 'login' %}">Iniciar Sesión</a>
+                        <a href="{% url 'login' %}">Iniciar</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'registro' %}">Registrate</a>
                     </li>
                     {% endif %}
                 </ul>

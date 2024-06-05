@@ -4,6 +4,7 @@ from .forms import ContactoForm, ProductoForm, CustomCreationForm
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.http import Http404
+from django.contrib.auth import authenticate, login
 # Create your views here.
 
 def index(request):
@@ -107,4 +108,15 @@ def registro(request):
         'form': CustomCreationForm()
     }
 
+    if request.method == 'POST':
+        formulario = CustomCreationForm (data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            user = authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
+            login(request, user)
+            messages.success(request, "Registro exitoso")
+            return redirect(to='index')
+        else:
+            data["form"]= formulario
+    
     return render(request, 'registration/registro.html',data)
