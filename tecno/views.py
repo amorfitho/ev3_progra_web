@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Producto
 from .forms import ContactoForm, ProductoForm
+from django.contrib import messages
 # Create your views here.
 
 def index(request):
@@ -50,7 +51,7 @@ def agregar_producto(request):
         formulario = ProductoForm(data=request.POST, files=request.FILES)
         if formulario.is_valid():
             formulario.save()
-            data["mensage"] = "guardado correctamente"
+            messages.success(request,"Producto registrado")
         else:
             data["form"] = formulario
     
@@ -77,6 +78,7 @@ def modificar_producto(request, id):
         formulario = ProductoForm(data=request.POST, instance=producto, files=request.FILES)
         if formulario.is_valid():
             formulario.save()
+            messages.success(request, "editado correctamente")
             return redirect(to="lista_producto")
         data["form"] = formulario
 
@@ -86,4 +88,5 @@ def modificar_producto(request, id):
 def eliminar_producto(request, id):
     producto = get_object_or_404(Producto, id=id)
     producto.delete()
+    messages.success(request, "eliminado correctamente")
     return redirect(to="lista_producto")
