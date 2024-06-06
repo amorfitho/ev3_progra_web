@@ -20,15 +20,7 @@ class ProductoForm(forms.ModelForm):
         widgets = {
             "fecha_fabri": forms.SelectDateWidget()
         }
-    
-
-""""""""""
-Class ingresaForm(User):
-    
-    class Meta:
-    model = User
-    fields = [username, password]
-"""""""""    
+      
 
 class CustomCreationForm(UserCreationForm):
     

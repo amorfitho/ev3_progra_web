@@ -33,15 +33,15 @@
                     <li>
                         <a href="{% url 'productos' %}">Productos</a>
                     </li>
+                    {% if user.is_authenticated %}
                     <li>
                         <a href="{% url 'agregar_producto' %}">Agregar un producto</a>
                     </li>
                     <li>
                         <a href="{% url 'lista_producto' %}">Lista de productos</a>
                     </li>
-                    {% if user.is_authenticated %}
                     <li>
-                        <a href="{% url 'logout' %}">Cerrar</a>
+                        <a href="{% url 'cerrar' %}">Cerrar</a>
                     </li>
                     <li>
                         <a href="#">@{{ user.username }}</a>

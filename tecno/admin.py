@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Marca, Producto, Contacto
+from .forms import CustomCreationForm
 # Register your models here.
 class  ProductoAdmin(admin.ModelAdmin):
     list_display = ["nombre","precio","nuevo","marca"]

@@ -4,7 +4,8 @@ from .forms import ContactoForm, ProductoForm, CustomCreationForm
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.http import Http404
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request):
@@ -102,12 +103,16 @@ def eliminar_producto(request, id):
     messages.success(request, "eliminado correctamente")
     return redirect(to="lista_producto")
 #-------------------------------------------------------------------------------------------
+def cerrar(request):
+    logout(request)
+    return redirect(to="index")
+#-------------------------------------------------------------------------------------------
 def registro(request):
 
     data = {
         'form': CustomCreationForm()
     }
-
+    
     if request.method == 'POST':
         formulario = CustomCreationForm (data=request.POST)
         if formulario.is_valid():
