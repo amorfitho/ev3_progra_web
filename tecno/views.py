@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 from django.http import Http404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 # Create your views here.
 
 def index(request):
@@ -108,11 +109,23 @@ def cerrar(request):
     return redirect(to="index")
 #-------------------------------------------------------------------------------------------
 def registro(request):
-
+    
+    if request.method=='POST':
+        username = request.POST["username"]
+        password = request.POST["password"]
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Nombre de usuario ya existente")
+        else:
+            user = User.objects.create_user (username=username, password=password)
+            user.save()
+            messages.success(request, "Cuenta creada exitosamente")
+            return redirect(to="index")
+    
+    """"""""""
     data = {
         'form': CustomCreationForm()
     }
-    
+
     if request.method == 'POST':
         formulario = CustomCreationForm (data=request.POST)
         if formulario.is_valid():
@@ -123,5 +136,5 @@ def registro(request):
             return redirect(to='index')
         else:
             data["form"]= formulario
-    
-    return render(request, 'registration/registro.html',data)
+    """""""""
+    return render(request, 'registration/registro.html')
