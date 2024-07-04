@@ -33,20 +33,25 @@
                     <li>
                         <a href="{% url 'productos' %}">Productos</a>
                     </li>
-                    {% if user.is_authenticated %}
+                    {% if perms.tecno.add_producto %}
                     <li>
                         <a href="{% url 'agregar_producto' %}">Agregar un producto</a>
                     </li>
+                    {% endif %}
+                    {% if perms.tecno.view_producto %}
                     <li>
                         <a href="{% url 'lista_producto' %}">Lista de productos</a>
                     </li>
+                    {% endif %}
+                    {% if user.is_authenticated %}
                     <li>
                         <a href="{% url 'cerrar' %}">Cerrar</a>
                     </li>
+                    
                     <li>
                         <a href="#">@{{ user.username }}</a>
                     </li>
-                    {%else%}
+                    {% else %}
                     <li>
                         <a href="{% url 'login' %}">Iniciar</a>
                     </li>

@@ -5,8 +5,9 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from django.http import Http404
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
+
 # Create your views here.
 
 def index(request):
@@ -46,6 +47,7 @@ def usuario1(request):
 def usuario2(request):
     return render(request,'tecno/usuario2.html')
 #-------------------------------------------------------------------------------------------
+@permission_required('tecno.add_producto')
 def agregar_producto(request):
 
     data ={
@@ -62,6 +64,7 @@ def agregar_producto(request):
     
     return render(request,'tecno/producto/agregar.html', data)
 #-------------------------------------------------------------------------------------------
+@permission_required('tecno.view_producto')
 def lista_productos(request):
     productos=Producto.objects.all()
     """""""""""""""
@@ -79,6 +82,7 @@ def lista_productos(request):
 
     return render(request,'tecno/producto/lista.html', data)
 #-------------------------------------------------------------------------------------------
+@permission_required('tecno.change_producto')
 def modificar_producto(request, id):
 
     producto = get_object_or_404(Producto, id=id)
@@ -98,12 +102,14 @@ def modificar_producto(request, id):
 
     return render(request,'tecno/producto/modificar.html',data)
 #-------------------------------------------------------------------------------------------
+@permission_required('tecno.delete_producto')
 def eliminar_producto(request, id):
     producto = get_object_or_404(Producto, id=id)
     producto.delete()
     messages.success(request, "eliminado correctamente")
     return redirect(to="lista_producto")
 #-------------------------------------------------------------------------------------------
+@login_required
 def cerrar(request):
     logout(request)
     return redirect(to="index")
